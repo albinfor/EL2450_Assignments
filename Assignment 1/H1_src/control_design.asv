@@ -29,11 +29,11 @@ G = uppertank*lowertank; % Transfer function from input to lower tank level
 [K_pid,Ti,Td,N] = polePlacePID(chi,omega0,zeta,Tau,Gamma,K);
 F = K_pid*(1+(1/(Ti*s))+((Td*N*s)/(s+N)));
 
-%A = F*G
+A = F*G
 
-%Phi = expm(A*h)
+Phi = expm(A*h)
 
-%[v, u] = eig(Phi)
+[v, u] = eig(Phi)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Digital Control design

@@ -1,12 +1,12 @@
 Model {
-  Name			  "tanks"
+  Name			  "tanks_digital"
   Version		  10.0
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.99"
+    ComputedModelVersion    "1.101"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -48,7 +48,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [72.0, 0.0, 1855.0, 1047.0]
+      Location		      [-8.0, -8.0, 1936.0, 1056.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -66,22 +66,69 @@ Model {
 	$ClassName		"Simulink.ExplorerBarInfo"
 	Visible			[1]
       }
-      Object {
-	$PropName		"EditorsInfo"
-	$ObjectID		5
-	$ClassName		"Simulink.EditorInfo"
-	IsActive		[1]
-	IsTabbed		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
-	Extents			[1801.0, 805.0]
-	ZoomFactor		[2.0]
-	Offset			[777.90530236864174, 42.947707780184487]
-	SceneRectInView		[777.90530236864174, 42.947707780184487, 900.5, 402.5]
+      Array {
+	Type			"Simulink.EditorInfo"
+	Dimension		5
+	Object {
+	  $ObjectID		  5
+	  IsActive		  [1]
+	  IsTabbed		  [1]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [1882.0, 814.0]
+	  ZoomFactor		  [2.0]
+	  Offset		  [769.63207448295111, 59.069895454863115]
+	  SceneRectInView	  [769.63207448295111, 59.069895454863115, 941.0, 407.0]
+	}
+	Object {
+	  $ObjectID		  6
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "155"
+	  Extents		  [1882.0, 814.0]
+	  ZoomFactor		  [5.5]
+	  Offset		  [26.409090909090907, -26.5]
+	  SceneRectInView	  [26.409090909090907, -26.5, 342.18181818181819, 148.0]
+	}
+	Object {
+	  $ObjectID		  7
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "85"
+	  Extents		  [1882.0, 814.0]
+	  ZoomFactor		  [2.66]
+	  Offset		  [-18.759398496240578, 118.49248120300751]
+	  SceneRectInView	  [-18.759398496240578, 118.49248120300751, 707.51879699248116, 306.01503759398497]
+	}
+	Object {
+	  $ObjectID		  8
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "91"
+	  Extents		  [1882.0, 814.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-651.38671875, -249.5]
+	  SceneRectInView	  [-651.38671875, -249.5, 1882.0, 814.0]
+	}
+	Object {
+	  $ObjectID		  9
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "131"
+	  Extents		  [1882.0, 814.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-639.590909090909, -375.86363636363626]
+	  SceneRectInView	  [-639.590909090909, -375.86363636363626, 1882.0, 814.0]
+	}
+	PropName		"EditorsInfo"
       }
       Object {
 	$PropName		"DockComponentsInfo"
-	$ObjectID		6
+	$ObjectID		10
 	$ClassName		"Simulink.DockComponentInfo"
 	Type			"GLUE2:PropertyInspector"
 	ID			"Property Inspector"
@@ -98,7 +145,7 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABjAP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAAOQD///8AAAcvAAADYgAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAA"
+      "QBjAHQAbwByAAAAAAD/////AAAAOQD///8AAAeAAAADawAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAA"
       Array {
 	Type			"Cell"
 	Dimension		0
@@ -115,9 +162,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "albin"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jan 28 16:02:14 2021"
-  RTWModifiedTimeStamp	  533665761
-  ModelVersionFormat	  "1.%<AutoIncrement:99>"
+  LastModifiedDate	  "Thu Jan 28 16:02:24 2021"
+  RTWModifiedTimeStamp	  533669761
+  ModelVersionFormat	  "1.%<AutoIncrement:101>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
@@ -177,13 +224,13 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    7
+    $ObjectID		    11
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "tanks"
+    model_		    "tanks_digital"
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "tanks"
+      Cell		      "tanks_digital"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -221,7 +268,7 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      8
+      $ObjectID		      12
       Version		      "19.1.1"
       DisabledProps	      []
       Description	      ""
@@ -229,7 +276,7 @@ Model {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
-	  $ObjectID		  9
+	  $ObjectID		  13
 	  Version		  "19.1.1"
 	  DisabledProps		  []
 	  Description		  ""
@@ -272,7 +319,7 @@ Model {
 	  SolverOrder		  3
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  10
+	  $ObjectID		  14
 	  Version		  "19.1.1"
 	  DisabledProps		  []
 	  Description		  ""
@@ -314,7 +361,7 @@ Model {
 	  LoggingIntervals	  "[-inf, inf]"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  11
+	  $ObjectID		  15
 	  Version		  "19.1.1"
 	  Array {
 	    Type		    "Cell"
@@ -387,7 +434,7 @@ Model {
 	  EfficientTunableParamExpr off
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  12
+	  $ObjectID		  16
 	  Version		  "19.1.1"
 	  Array {
 	    Type		    "Cell"
@@ -509,7 +556,7 @@ Model {
 	  ArithmeticOperatorsInVariantConditions "warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  13
+	  $ObjectID		  17
 	  Version		  "19.1.1"
 	  DisabledProps		  []
 	  Description		  ""
@@ -559,7 +606,7 @@ Model {
 	  HardwareBoardFeatureSet "EmbeddedCoderHSP"
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  14
+	  $ObjectID		  18
 	  Version		  "19.1.1"
 	  DisabledProps		  []
 	  Description		  ""
@@ -579,7 +626,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  15
+	  $ObjectID		  19
 	  Version		  "19.1.1"
 	  DisabledProps		  []
 	  Description		  ""
@@ -614,7 +661,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  16
+	  $ObjectID		  20
 	  Version		  "19.1.1"
 	  Array {
 	    Type		    "Cell"
@@ -703,7 +750,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      17
+	      $ObjectID		      21
 	      Version		      "19.1.1"
 	      Array {
 		Type			"Cell"
@@ -793,7 +840,7 @@ Model {
 	    }
 	    Simulink.STFCustomTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      18
+	      $ObjectID		      22
 	      Version		      "19.1.1"
 	      Array {
 		Type			"Cell"
@@ -888,7 +935,7 @@ Model {
 	  }
 	}
 	SlCovCC.ConfigComp {
-	  $ObjectID		  19
+	  $ObjectID		  23
 	  Version		  "19.1.1"
 	  DisabledProps		  []
 	  Description		  "Simulink Coverage Configuration Component"
@@ -939,11 +986,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    8
+    $ObjectID		    12
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    20
+    $ObjectID		    24
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -1020,6 +1067,18 @@ Model {
       SampleTime	      "inf"
       FramePeriod	      "inf"
       PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      DiscreteStateSpace
+      A			      "1"
+      B			      "1"
+      C			      "1"
+      D			      "1"
+      InitialCondition	      "0"
+      SampleTime	      "1"
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      Realization	      "auto"
     }
     Block {
       BlockType		      Fcn
@@ -1188,18 +1247,10 @@ Model {
     Block {
       BlockType		      Terminator
     }
-    Block {
-      BlockType		      TransferFcn
-      Numerator		      "[1]"
-      Denominator	      "[1 2 1]"
-      AbsoluteTolerance	      "auto"
-      ContinuousStateAttributes	"''"
-      Realization	      "auto"
-    }
   }
   System {
-    Name		    "tanks"
-    Location		    [72, 0, 1927, 1047]
+    Name		    "tanks_digital"
+    Location		    [-8, -8, 1928, 1048]
     Open		    on
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
@@ -1216,7 +1267,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "200"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "129"
+    SIDHighWatermark	    "160"
     SimulinkSubDomain	    "Simulink"
     Block {
       BlockType		      Constant
@@ -1240,16 +1291,16 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Continuous controller"
-      SID		      "124"
+      Name		      "Discretized controller"
+      SID		      "155"
       Ports		      [2, 1]
       Position		      [1045, 185, 1140, 240]
-      ZOrder		      35
+      ZOrder		      41
       RequestExecContextInheritance off
       ContentPreviewEnabled   on
       System {
-	Name			"Continuous controller"
-	Location		[65, 24, 1920, 1080]
+	Name			"Discretized controller"
+	Location		[-8, -8, 1928, 1048]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -1264,12 +1315,12 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"606"
+	ZoomFactor		"550"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
 	  Name			  "r"
-	  SID			  "125"
+	  SID			  "156"
 	  Position		  [35, 33, 65, 47]
 	  ZOrder		  3
 	  IconDisplay		  "Port number"
@@ -1277,26 +1328,29 @@ Model {
 	Block {
 	  BlockType		  Inport
 	  Name			  "y"
-	  SID			  "126"
+	  SID			  "157"
 	  Position		  [35, 73, 65, 87]
 	  ZOrder		  4
 	  Port			  "2"
 	  IconDisplay		  "Port number"
 	}
 	Block {
-	  BlockType		  TransferFcn
+	  BlockType		  DiscreteStateSpace
 	  Name			  "\n"
-	  SID			  "127"
-	  Position		  [195, 20, 255, 60]
-	  ZOrder		  -1
+	  SID			  "158"
+	  Position		  [195, 20, 275, 60]
+	  ZOrder		  6
 	  NamePlacement		  "alternate"
-	  Numerator		  "F.num{1}"
-	  Denominator		  "F.den{1}"
+	  A			  "A_discretized"
+	  B			  "B_discretized"
+	  C			  "C_discretized"
+	  D			  "D_discretized"
+	  SampleTime		  "Ts"
 	}
 	Block {
 	  BlockType		  Sum
 	  Name			  "Sum"
-	  SID			  "128"
+	  SID			  "159"
 	  Ports			  [2, 1]
 	  Position		  [100, 30, 120, 50]
 	  ZOrder		  2
@@ -1313,8 +1367,8 @@ Model {
 	Block {
 	  BlockType		  Outport
 	  Name			  "u"
-	  SID			  "129"
-	  Position		  [300, 33, 330, 47]
+	  SID			  "160"
+	  Position		  [330, 33, 360, 47]
 	  ZOrder		  5
 	  IconDisplay		  "Port number"
 	}
@@ -1412,21 +1466,22 @@ Model {
       "1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921568627450"
       "98 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098"
       "039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},"
-      "'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal"
-      "','0','MaxYLimReal','100','YLabelReal','','MinYLimMag','60.15','MaxYLimMag','60.4','LegendVisibility','Off','XGr"
-      "id',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803"
-      "922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705"
-      "882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.2745098039215"
-      "69 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCach"
-      "e',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1)),extmgr"
-      ".Configuration('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousZoomMode','ZoomOut'),extmgr.Configurat"
-      "ion('Tools','Measurements',true,'Version','2018a')),'Version','2018a','Location',[-779 364 -465 566])"
+      "'NumLines',1,'LineNames',{{'Two tank system/1'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',st"
+      "ruct('MinYLimReal','0','MaxYLimReal','100','YLabelReal','','MinYLimMag','60.15','MaxYLimMag','60.4','LegendVisib"
+      "ility','Off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6862745098039"
+      "22 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.62352941176470"
+      "6 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.71764705882352"
+      "9 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','L"
+      "inePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Plac"
+      "ement',1)),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousZoomMode','ZoomOut'),"
+      "extmgr.Configuration('Tools','Measurements',true,'Version','2019b')),'Version','2019b','Location',[803 439 1117 "
+      "641])"
       NumInputPorts	      "1"
       Floating		      off
     }
     Block {
       BlockType		      Scope
-      Name		      "Tank2 level continuous"
+      Name		      "Tank2 level digital"
       SID		      "84"
       Ports		      [4]
       Position		      [1440, 228, 1470, 262]
@@ -1434,26 +1489,23 @@ Model {
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingSaveFormat','StructureWithTime','DataLoggingDecimation','1','DataLoggin"
-      "gDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{struct('MinYLimReal"
-      "','-41.4087','MaxYLimReal','372.6783','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','372.6783','LegendVisi"
-      "bility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6862745098039"
-      "22 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.62352941176470"
-      "6 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.71764705882352"
-      "9 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','L"
-      "inePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',4,'LineNames',{{'Reference','Sum1','Two tank "
-      "system/1','y'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-41.4087','Ma"
-      "xYLimReal','372.6783','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','372.6783','LegendVisibility','On','XG"
-      "rid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.68627450980"
-      "3922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.41176470"
-      "5882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921"
-      "569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCac"
-      "he',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1)),extmg"
-      "r.Configuration('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousZoomMode','ZoomX','PreviousAutoscale'"
-      ",'X'),extmgr.Configuration('Tools','Measurements',true,'Version','2019b','Measurements',struct('traceselector',s"
-      "truct('Line',4),'bilevel',struct('StateLevelsSource','Auto','StateLevels',[40.0658565391596 49.9443374131042],'P"
-      "ercentStateLevelTolerance',2,'PercentReferenceLevels',[10 50 90],'SettlingSeekDuration',0.02,'SettingsPanelOpen'"
-      ",0,'TransitionsPanelOpen',0,'AberrationsPanelOpen',1,'CyclesPanelOpen',0)))),'Version','2019b','Location',[962 8"
-      "4 1920 1038],'VisibleAtModelOpen','on')"
+      "gDecimateData',true,'DataLogging',true,'DataLoggingVariableName','y_digital'),extmgr.Configuration('Visuals','Ti"
+      "me Domain',true,'SerializedDisplays',{struct('MinYLimReal','-180.62382','MaxYLimReal','387.97123','YLabelReal','"
+      "','MinYLimMag',' 0.00000','MaxYLimMag','387.97123','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPha"
+      "se',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrde"
+      "r',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921568"
+      "62745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0"
+      "745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames'"
+      ",{{}},'NumLines',4,'LineNames',{{'Reference','Sum1','Two tank system/1','y'}},'ShowContent',true,'Placement',1)}"
+      ",'DisplayPropertyDefaults',struct('MinYLimReal','-180.62382','MaxYLimReal','387.97123','YLabelReal','','MinYLimM"
+      "ag',' 0.00000','MaxYLimMag','387.97123','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'"
+      "AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0"
+      "666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0."
+      "831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509803921"
+      "5686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumL"
+      "ines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1)),extmgr.Configuration('Tools','Plot Navigation',tru"
+      "e,'OnceAtStop',false,'PreviousZoomMode','ZoomY'),extmgr.Configuration('Tools','Measurements',true,'Version','201"
+      "9b')),'Version','2019b','Location',[962 587 1920 988],'VisibleAtModelOpen','on')"
       NumInputPorts	      "4"
       Floating		      off
     }
@@ -1471,7 +1523,7 @@ Model {
       }
       System {
 	Name			"Two tank system"
-	Location		[65, -4, 1920, 1080]
+	Location		[-8, -8, 1928, 1048]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -1541,7 +1593,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Tank 1"
-	    Location		    [65, -4, 1920, 1080]
+	    Location		    [-8, -8, 1928, 1048]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    SetExecutionDomain	    off
@@ -2104,7 +2156,7 @@ Model {
       }
       Branch {
 	ZOrder			23
-	DstBlock		"Tank2 level continuous"
+	DstBlock		"Tank2 level digital"
 	DstPort			4
       }
     }
@@ -2112,48 +2164,41 @@ Model {
       ZOrder		      19
       SrcBlock		      "Sum1"
       SrcPort		      1
-      Points		      [4, 0]
+      Points		      [17, 0]
       Branch {
-	ZOrder			50
-	Points			[0, 80; 152, 0; 0, -55]
-	DstBlock		"Tank2 level continuous"
+	ZOrder			72
+	Points			[0, 80; 139, 0; 0, -55]
+	DstBlock		"Tank2 level digital"
 	DstPort			2
       }
       Branch {
-	ZOrder			48
+	ZOrder			70
 	DstBlock		"Two tank system"
 	DstPort			1
       }
     }
     Line {
-      ZOrder		      41
-      SrcBlock		      "Continuous controller"
-      SrcPort		      1
-      DstBlock		      "Sum1"
-      DstPort		      2
-    }
-    Line {
-      ZOrder		      46
+      ZOrder		      66
       SrcBlock		      "Two tank system"
       SrcPort		      1
       Points		      [7, 0; 0, 65]
-      DstBlock		      "Tank2 level continuous"
+      DstBlock		      "Tank2 level digital"
       DstPort		      3
     }
     Line {
-      ZOrder		      42
+      ZOrder		      63
       SrcBlock		      "Reference"
       SrcPort		      1
-      Points		      [14, 0]
+      Points		      [18, 0]
       Branch {
-	ZOrder			54
-	Points			[0, -84; 402, 0; 0, 114]
-	DstBlock		"Tank2 level continuous"
+	ZOrder			76
+	Points			[0, -89; 385, 0; 0, 119]
+	DstBlock		"Tank2 level digital"
 	DstPort			1
       }
       Branch {
-	ZOrder			52
-	DstBlock		"Continuous controller"
+	ZOrder			74
+	DstBlock		"Discretized controller"
 	DstPort			1
       }
     }
@@ -2166,12 +2211,19 @@ Model {
     }
     Line {
       Name		      "Delta y"
-      ZOrder		      43
+      ZOrder		      65
       Labels		      [1, 1]
       SrcBlock		      "Sum2"
       SrcPort		      1
       Points		      [-205, 0]
-      DstBlock		      "Continuous controller"
+      DstBlock		      "Discretized controller"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      64
+      SrcBlock		      "Discretized controller"
+      SrcPort		      1
+      DstBlock		      "Sum1"
       DstPort		      2
     }
   }

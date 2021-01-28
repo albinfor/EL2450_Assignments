@@ -48,7 +48,6 @@ legend("\chi = 0.5 \zeta = 0.7 \omega_0 = 0.1","\chi = 0.5 \zeta = 0.7 \omega_0 
 grid on
 
 %% Zero order hold sampled controller
-clc;
 h = [];
 RTz = [];
 RTd = [];
@@ -56,12 +55,19 @@ OSz = [];
 OSd = [];
 STz = [];
 STd = [];
-for Ts = 0.1:0.2:1.5
+i = 1;
+plottimes = [];
+n = 0.2;
+N = 2.1;
+for Ts = 0.1:n:N
     h = [h; Ts];
     sim('tanks_digital_zoh');
     S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
     figure(2)
-    plot(Tank2(:,1), Tank2(:,2))
+    if i == 1
+        plottimes = [plottimes, Ts];
+        plot(Tank2(:,1), Tank2(:,2))
+    end
     grid on
     hold on
     disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
@@ -76,22 +82,32 @@ for Ts = 0.1:0.2:1.5
     sim('tanks_digital');
     S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
     figure(3)
-    plot(Tank2(:,1), Tank2(:,2))
+    if i == 1
+        plot(Tank2(:,1), Tank2(:,2))
+        i = 4;
+    end
     grid on
     hold on
     disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
     RTd = [RTd; S.RiseTime]; OSd = [OSd; S.Overshoot]; STd = [STd; S.SettlingTime-25];
     disp(" ")
+    i = i-1;
 end
+
+figure(2)
+legendCell = strcat('N=',string(num2cell(0.1:n*3:N)));
+legend(legendCell, 'location', 'northwest');
+figure(3)
+legend(legendCell, 'location', 'northwest');
 
 figure(4)
 plot(h,RTz,h, OSz,h, STz);
 title('ZOH metrics vs sampling time')
-legend("Rise Time", "Overshoot", "Settling time")
+legend("Rise Time", "Overshoot", "Settling time", 'location', 'northwest')
 figure(5)
 plot(h,RTd, h, OSd, h, STd);
 title('Discretized metrics vs sampling time')
-legend("Rise Time", "Overshoot", "Settling time")
+legend("Rise Time", "Overshoot", "Settling time", 'location', 'northwest')
 
 
 %%
@@ -129,12 +145,25 @@ Wo = [C; C*Phi];
 disp("The rank of the observability matrix is: "+rank(Wo)+"/"+size(Wo,1))
 
 % State feedback controller gain
-L = 1;
+G_c = F*G/(1+F*G);
+p = pole(minreal(G_c));
+z = exp(Ts*p);
+L = acker(Phi, Gamma, z(1:2));
 % observer gain
-K = 1;
+K = acker(Phi', C', z(3:4));
+K = K';
 % reference gain
-lr = 1;
+lr = 1/(C* inv((eye(2,2)-Phi+Gamma*L))*Gamma);
+
+sim('tanks_discrete');
+S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+figure(6)
+plot(Tank2(:,1), Tank2(:,2))
+grid on
+hold on
+disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+
 
 % augmented system matrices
-Aa = 1;
-Ba = 1;
+Aa = [Phi -Gamma*L;K*C (Phi-Gamma*L-K*C)];
+Ba = [Gamma*lr;Gamma*lr];

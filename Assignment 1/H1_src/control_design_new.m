@@ -47,6 +47,25 @@ hold off
 legend("\chi = 0.5 \zeta = 0.7 \omega_0 = 0.1","\chi = 0.5 \zeta = 0.7 \omega_0 = 0.2","\chi = 0.5 \zeta = 0.8 \omega_0 = 0.2",'Location','southeast')
 grid on
 
+%% Do open loop margins
+figure(7)
+for i = 1:3
+    param_select = i;
+    chi = parameters(param_select,1);
+    omega0 = parameters(param_select,3);
+    zeta = parameters(param_select,2);
+
+    [K_pid,Ti,Td,N] = polePlacePID(chi,omega0,zeta,Tau,gamma_tank,k_tank);
+    F = K_pid*(1+(1/(Ti*s))+((Td*N*s)/(s+N)));
+
+    sys = F*G/(1+F*G);
+    hold on
+    subplot(2,2,i)
+    margin(G*F);
+    
+    hold off
+end
+
 %% Zero order hold sampled controller
 h = [];
 RTz = [];
@@ -57,9 +76,9 @@ STz = [];
 STd = [];
 i = 1;
 plottimes = [];
-n = 0.2;
-N = 3.5;
-for Ts = 0.1:n:N
+n = 0.1;
+N = 4;
+for Ts = 4:n:N
     h = [h; Ts];
     sim('tanks_digital_zoh');
     S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
@@ -169,3 +188,21 @@ title('Discretized controller with discretized system')
 % augmented system matrices
 Aa = [Phi -Gamma*L;K*C (Phi-Gamma*L-K*C)];
 Ba = [Gamma*lr;Gamma*lr];
+
+eig(Aa)
+
+for i = 7:10
+    bits = 2^i;
+    resolution = 100/bits;
+    
+    sim('tanks_discrete_quantize');
+    S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+    figure(8)
+    plot(Tank2(:,1), Tank2(:,2))
+    grid on
+    hold on
+    disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+    title('Discretized controller with discretized system and quantization')
+end
+legendCell = strcat('bits=',string(num2cell(7:10)));
+legend(legendCell, 'location', 'northwest');

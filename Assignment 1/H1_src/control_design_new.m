@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hybrid and Embedded control systems
+% Homework 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Initialization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+clear; clc;
+init_tanks;
+g = 9.82;
+Tau = 1/alpha1*sqrt(2*tank_h10/g);
+k_tank = 60*beta*Tau;
+gamma_tank = alpha1^2/alpha2^2;
+uss = alpha2/beta*sqrt(2*g*tank_init_h2)*100/15; % steady state input
+yss = 40; % steady state output
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Continuous Control design
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+s = tf('s');
+uppertank = (k_tank)/(1+Tau*s);
+lowertank = (gamma_tank)/(1+gamma_tank*Tau*s);
+G = uppertank*lowertank; % Transfer function from input to lower tank level
+
+% Calculate PID parameters
+parameters = [[0.5, 0.7, 0.1];[0.5, 0.7, 0.2];[0.5, 0.8, 0.2]];
+
+figure(1)
+stats = [];
+for i = 1:3
+    param_select = i;
+    chi = parameters(param_select,1);
+    omega0 = parameters(param_select,3);
+    zeta = parameters(param_select,2);
+    [K_pid,Ti,Td,N] = polePlacePID(chi,omega0,zeta,Tau,gamma_tank,k_tank);
+    F = K_pid*(1+(1/(Ti*s))+((Td*N*s)/(s+N)));
+    sys = F*G/(1+F*G);
+
+    sim('tanks');
+    S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+    plot(Tank2(:,1), Tank2(:,2))
+    hold on
+    disp("Scenario: "+i +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+end
+hold off
+legend("\chi = 0.5 \zeta = 0.7 \omega_0 = 0.1","\chi = 0.5 \zeta = 0.7 \omega_0 = 0.2","\chi = 0.5 \zeta = 0.8 \omega_0 = 0.2",'Location','southeast')
+grid on
+
+%% Do open loop margins
+figure(7)
+for i = 1:3
+    param_select = i;
+    chi = parameters(param_select,1);
+    omega0 = parameters(param_select,3);
+    zeta = parameters(param_select,2);
+
+    [K_pid,Ti,Td,N] = polePlacePID(chi,omega0,zeta,Tau,gamma_tank,k_tank);
+    F = K_pid*(1+(1/(Ti*s))+((Td*N*s)/(s+N)));
+
+    sys = F*G/(1+F*G);
+    hold on
+    subplot(2,2,i)
+    margin(G*F);
+    
+    hold off
+end
+
+%% Zero order hold sampled controller
+h = [];
+RTz = [];
+RTd = [];
+OSz = [];
+OSd = [];
+STz = [];
+STd = [];
+i = 1;
+plottimes = [];
+n = 0.1;
+N = 4;
+for Ts = 4:n:N
+    h = [h; Ts];
+    sim('tanks_digital_zoh');
+    S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+    figure(2)
+    if i == 1
+        plottimes = [plottimes, Ts];
+        plot(Tank2(:,1), Tank2(:,2))
+    end
+    grid on
+    hold on
+    disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+    
+    RTz = [RTz; S.RiseTime]; OSz = [OSz; S.Overshoot]; STz = [STz; S.SettlingTime-25];
+    
+    disc_controller = ss(c2d(F,Ts,'ZOH'));
+    A_discretized = disc_controller.A;
+    B_discretized = disc_controller.B;
+    C_discretized = disc_controller.C;
+    D_discretized = disc_controller.D;
+    sim('tanks_digital');
+    S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+    figure(3)
+    if i == 1
+        plot(Tank2(:,1), Tank2(:,2))
+        i = 4;
+    end
+    grid on
+    hold on
+    disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+    RTd = [RTd; S.RiseTime]; OSd = [OSd; S.Overshoot]; STd = [STd; S.SettlingTime-25];
+    disp(" ")
+    i = i-1;
+end
+
+figure(2)
+legendCell = strcat('Ts=',string(num2cell(0.1:n*3:N)));
+legend(legendCell, 'location', 'northwest');
+title('Sampled ZOH control signal')
+figure(3)
+title('Discretized controller')
+legend(legendCell, 'location', 'northwest');
+
+figure(4)
+plot(h,RTz,h, OSz,h, STz);
+title('ZOH metrics vs sampling time')
+legend("Rise Time", "Overshoot", "Settling time", 'location', 'northwest')
+figure(5)
+plot(h,RTd, h, OSd, h, STd);
+title('Discretized metrics vs sampling time')
+legend("Rise Time", "Overshoot", "Settling time", 'location', 'northwest')
+
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Digital Control design
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Ts = 4; % Sampling time
+
+% Discretize the continous controller, save it in state space form
+% [A_discretized,B_discretized,C_discretized,D_discretized] =
+
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Discrete Control design
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Ts = 4;
+% Discretize the continous state space system, save it in state space form
+A = [-1/Tau, 0; 1/Tau, -1/(gamma_tank*Tau)];
+B = [k_tank/Tau; 0];
+C = [0, 1];
+I = eye(2);
+disc_system = ss(c2d(ss(A,B,C,0), Ts, 'ZOH'));
+Phi = disc_system.A;
+Gamma = disc_system.B;
+C = disc_system.C;
+D = disc_system.D;
+%[Phi,Gamma,C,D] = 
+
+% Observability and reachability
+
+Wc = [Gamma Phi*Gamma];
+disp("The rank of the controllability matrix is: "+rank(Wc)+"/"+size(Wc,1))
+Wo = [C; C*Phi];
+disp("The rank of the observability matrix is: "+rank(Wo)+"/"+size(Wo,1))
+
+% State feedback controller gain
+G_c = F*G/(1+F*G);
+p = pole(minreal(G_c));
+z = exp(Ts*p);
+L = acker(Phi, Gamma, z(1:2));
+% observer gain
+K = acker(Phi', C', z(3:4));
+K = K';
+% reference gain
+lr = 1/(C* inv((eye(2,2)-Phi+Gamma*L))*Gamma);
+
+sim('tanks_discrete');
+S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+figure(6)
+plot(Tank2(:,1), Tank2(:,2))
+grid on
+hold on
+disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+title('Discretized controller with discretized system')
+
+% augmented system matrices
+Aa = [Phi -Gamma*L;K*C (Phi-Gamma*L-K*C)];
+Ba = [Gamma*lr;Gamma*lr];
+
+eig(Aa)
+
+for i = 7:10
+    bits = 2^i;
+    resolution = 100/bits;
+    
+    sim('tanks_discrete_quantize');
+    S = stepinfo(Tank2(:,2)-yss, Tank2(:,1),'SettlingTimeThreshold',0.02);
+    figure(8)
+    plot(Tank2(:,1), Tank2(:,2))
+    grid on
+    hold on
+    disp("Sampling time: "+Ts +" Rise time: " + S.RiseTime + " Overshoot: "+S.Overshoot + " Settling Time: "+(S.SettlingTime-25))
+    title('Discretized controller with discretized system and quantization')
+end
+legendCell = strcat('bits=',string(num2cell(7:10)));
+legend(legendCell, 'location', 'northwest');

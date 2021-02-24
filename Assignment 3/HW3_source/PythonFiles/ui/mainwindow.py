@@ -96,8 +96,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.s_control.settimeout(5)
                     self.s_control.connect((self.host , self.port_control)) # connect the socket to the port for communicating with the simulated ontroller
                     self.controlPoll.register(self.s_control,select.POLLOUT) #registers the socket in the polling object for the controller
-                    print "Control Socket Connected"
-                    print 'Simulation active'
+                    print("Control Socket Connected")
+                    print('Simulation active')
                     self.wlinkconnection = slink.Slink(self.s_control,self.serialPrintbrowser) #create an Slink object which uses the socket to communicate with the simulated controller
                     self.controllooptimer.start(int(1./self.controlspinbox.value()*1000.)) # start timer for periodic execution of controlupdate function
                     self.last_controlupdate = time.time()
@@ -119,7 +119,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if self.simulationCheckBox.isChecked():  #if the simlation is used
                 self.controlPoll.unregister(self.s_control)
                 self.s_control.close()
-                print 'controller socket closed'
+                print ('controller socket closed')
                 
         # set several buttons according to the state of the 'Control On' button to enable or disable them
         self.controlActive=checked
@@ -246,7 +246,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     # update display
                     if self.autocontrolbutton.isChecked():
                     # send state to robot
-                        print 'send current state'
+                        print ('send current state')
         return
     
     def readserial(self):
@@ -282,9 +282,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.s_mocap.settimeout(5)
                     self.s_mocap.connect((self.host , self.port_mocap))
                     self.mocapPoll.register(self.s_mocap,select.POLLOUT)
-                    print "Mocap Socket connected"
+                    print ("Mocap Socket connected")
                     self.mocapconnection = mocapSIM.MocapSIM(self.s_mocap) # set starting position to node 1
-                    print 'Simulation active'
+                    print ('Simulation active')
                     self.mocaplooptimer.start(int(1./self.mocapspinbox.value()*1000.)) # start timer for periodic execution of mocapupdate function
                     self.last_mocapupdate = time.time()
             else:
@@ -300,7 +300,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if self.simulationCheckBox.isChecked():  
                 self.mocapPoll.unregister(self.s_mocap)
                 self.s_mocap.close()
-                print 'MOCAP socket closed'
+                print ('MOCAP socket closed')
             self.mocapconnection.close()
             self.mocaplooptimer.stop()
         # set several buttons according to the state of the 'Mocap On' button to enable or disable them
@@ -403,7 +403,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pos = self.get_realposition(*self.animation.get_node_position(int(node)))
         self.xstartspinbox.setValue(pos[0])
         self.ystartspinbox.setValue(pos[1])
-        print self.animation.get_node_position(int(node))
+        print (self.animation.get_node_position(int(node)))
         
     
     @pyqtSignature("QString")

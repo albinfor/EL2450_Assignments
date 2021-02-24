@@ -23,14 +23,16 @@ for K=0.5:0.5:2.0
     d0 = data_d0.signals.values;
     
     figure(1), hold on
-    stairs(t,theta_error,'Linewidth',1)
+    p = stairs(t,theta_error,'-o','MarkerSize',4);
+    set(p, 'markerfacecolor', get(p, 'color'));
     xlabel('Time $t$','Interpreter','latex')
     ylabel('Directional error $\theta^R-\theta[k]$','Interpreter','latex')
     legend
     grid on
     
     figure(2), hold on
-    stairs(t,d0,'Linewidth',1)
+    p = stairs(t,d0,'-o','MarkerSize',4);
+    set(p, 'markerfacecolor', get(p, 'color'));
     xlabel('Time $t$','Interpreter','latex')
     ylabel('Positional error $d_0[k]$','Interpreter','latex')
     grid on

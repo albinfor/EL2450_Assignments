@@ -6,6 +6,6 @@ double theta_g;
 int state = 0;
 
 //Controller parameters
-double K_Psi = 4;
-double K_omega = 4;
-double p = 4;
+const double K_Psi = 4;
+const double K_omega = 4;
+const double p = 4;

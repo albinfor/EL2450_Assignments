@@ -1,8 +1,13 @@
 
 //Rotational fixing
 theta_R = atan2(yg-y,xg-x)*180/PI;
-theta_error = theta_R-theta;
 theta_g = atan2(yg-y0,xg-x0)*180/PI;
+if (abs(theta_R-theta) < abs(theta_R-theta-360)){
+    theta_error = theta_R-theta;
+} else {
+    theta_error = theta_R-theta-360;
+}
+
 if (state == 0){
     Serial.print("Rotating");
     //Keep close to start point and get correct angle

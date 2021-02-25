@@ -11,15 +11,20 @@ if (abs(theta_R-theta) < abs(theta_R-theta-360)){
 if (state == 0){
     Serial.print("Rotating");
     //Keep close to start point and get correct angle
-    v = K_omega*(cos(theta*PI/180)*(x0-x)+sin(theta*PI/180)*(y0-y));
+    d0 = (cos(theta*PI/180)*(x0-x)+sin(theta*PI/180)*(y0-y));
+    v = K_omega*d0;
     w = K_Psi*theta_error;
-    if (abs(theta_error)<4) state = 1;
+    if (abs(theta_error)<2) state = 1;
 } else if (state == 1){
     Serial.print("Driving");
     //Keep close to line and drive to goal
-    v = K_omega*(cos(theta_g*PI/180)*(xg-x)+sin(theta_g*PI/180)*(yg-y));
-    w = K_Psi*(sin(theta_g*PI/180)*(x-x0+p*cos(theta*PI/180))-cos(theta_g*PI/180)*(y-y0+p*sin(theta*PI/180)));
-    if (abs(x-xg)<15 && abs(y-yg)<15) state = 2;
+    dg = (cos(theta_g*PI/180)*(xg-x)+sin(theta_g*PI/180)*(yg-y));
+    v = K_omega*dg;
+
+    dp = (sin(theta_g*PI/180)*(x-x0+p*cos(theta*PI/180))-cos(theta_g*PI/180)*(y-y0+p*sin(theta*PI/180)));
+    w = K_Psi*dp;
+
+    if (abs(x-xg)<5 && abs(y-yg)<5) state = 2;
 } else if (state == 2){
     Serial.print("Stopping");
     v = 0;
@@ -29,7 +34,7 @@ if (state == 0){
 
 
 //In case students implement limits on control outputs
-limit_v = 400;
+limit_v = 200;
 limit_w = 200;
 if (v >= limit_v){
         v=limit_v;

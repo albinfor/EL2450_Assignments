@@ -3,6 +3,9 @@ double w = 0;
 double theta_R;
 double theta_error;
 double theta_g;
+double d0;
+double dg;
+double dp;
 int state = 0;
 
 //Simulator parameters
@@ -13,9 +16,9 @@ int limit_w;
 
 
 //Controller parameters
-//double K_Psi = 0.01*L_true/(h*R_true); //Ain't working brah
-//double K_omega = 0.0001*1/(h*R_true); //still ain't working brah
+//double K_Psi = L_true/(h*R_true); //Ain't working brah
+//double K_omega = 1/(h*R_true); //still ain't working brah
 
-double p = 40;
+double p = 50;
 double K_Psi = 5;
 double K_omega = 8;

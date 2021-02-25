@@ -14,7 +14,7 @@ int limit_w;
 
 //Controller parameters
 //double K_Psi = 0.01*L_true/(h*R_true); //Ain't working brah
-//double K_omega = 0.0001*1/(h*R_true); //Ain't working brah
+//double K_omega = 0.0001*1/(h*R_true); //still ain't working brah
 
 double p = 40;
 double K_Psi = 5;

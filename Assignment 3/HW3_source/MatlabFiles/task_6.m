@@ -6,18 +6,19 @@ clc;
 R = 1;
 L = 1;
 h = 1;
+theta_ref = pi/4;
 
 %% Plot theta for K = [0.5, 1.0, 1.5, 2.0]
 figure, hold on
 for K=0.5:0.5:2
-    sim('task_6');
+    sim('task_6_model');
     data = ans;
 
     t = data.theta.time;
     theta = data.theta.signals.values;
     plot(t,theta)
 end
-ylim([0 2.0])
+ylim([0 pi/2])
 xlabel('Time $t$','Interpreter','latex')
 ylabel('Theta $\theta$','Interpreter','latex')
 legend('$K_\Psi=0.5$','$K_\Psi=1.0$','$K_\Psi=1.5$','$K_\Psi=2.0$','Interpreter','latex')

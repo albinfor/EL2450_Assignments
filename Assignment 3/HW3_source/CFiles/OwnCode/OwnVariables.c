@@ -7,6 +7,8 @@ double d0;
 double dg;
 double dp;
 int state = 0;
+double d;
+double theta_err;
 
 //Simulator parameters
 double R = 0.1001405119340;
